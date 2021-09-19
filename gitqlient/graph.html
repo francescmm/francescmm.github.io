@@ -1,0 +1,73 @@
+<html>
+   <head>
+      <title>GitQlient UI documentation: an interactive mapping guide</title>
+      <script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+      <script type="text/javascript" src="jquery.maphilight.min.js"></script>
+      <script type="text/javascript" src="postscribe.min.js"></script>
+      <link rel="stylesheet" href="styles.css">
+      <script type="text/javascript">
+         $(function() {
+            $('.map').maphilight();
+         });
+      </script>
+   </head>
+   <body>
+      <h1>GitQlient UI documentation: an interactive mapping guide</h1>
+      <p><strong>The different parts that form the UI will be hoevered when using the mouse.</strong></p>
+      <p>This scren shows the main screen once a repository has been opened. The class in charge of wrapping all the widgets is <a href="#">GitQlientRepo</a>.</p>
+      <table>
+         <tr>
+            <td style="vertical-align:top">
+               <div style="display: inline-block; vertical-align: top;">
+                  <h3 class="ui" media="big_widgets/HistoryWidget.h"><a href="#">Graph view (HistoryWidget)</a></h3>
+                  <img class="map" src="img/01_01_graph_view_wip.png" width="1138" height="758" usemap="#historywidget">
+                  <map name="historywidget">
+                     <area class="ui" href="fulldiff.html" media="" title="To the Diff view" shape="rect" coords="382,82,430,134">
+                     <area class="ui" href="blamewidget.html" media="" title="To the Blame view" shape="rect" coords="430,82,480,134">
+                     <area class="ui" href="github.html" media="" title="To the GitHub view" shape="rect" coords="595,82,640,134">
+                     <area class="ui" href="config.html" media="" title="To the Config view" shape="rect" coords="700,82,750,134">
+                     <area class="ui" href="#" media="aux_widgets/PomodoroButton.h" title="PomodoroButton" shape="rect" coords="750,82,810,134">
+                     <area class="ui" href="#" media="big_widgets/Controls.h" title="Controls" shape="rect" coords="330,82,810,135">
+                     <area class="ui" href="#" media="big_widgets/HistoryWidget.h" title="HistoryWidget::wipInfoFrame" shape="rect" coords="12,136,217,202">
+                     <area class="ui" href="#" media="commits/WipWidget.h" title="WipWidget" shape="rect" coords="12,203,217,745">
+                     <area class="ui" href="#" media="big_widgets/HistoryWidget.h" title="HistoryWidget::graphOptionsLayout" shape="rect" coords="215,136,870,165">
+                     <area class="ui" href="#" media="history/CommitHistoryView.h" title="Shows AmendWidget" shape="rect" coords="215,225,850,250">
+                     <area class="ui" href="#" media="history/CommitHistoryView.h" title="Shows CommitInfoWidget" shape="rect" coords="215,250,850,275">
+                     <area class="ui" href="#" media="history/CommitHistoryView.h" title="CommitHistoryView" shape="rect" coords="215,165,870,745">
+                     <area class="ui" href="#" media="branches/BranchTreeWidget.h" title="BranchTreeWidget" shape="rect" coords="874,170,1120,328">
+                     <area class="ui" href="#" media="branches/BranchTreeWidget.h" title="BranchTreeWidget" shape="rect" coords="874,329,1120,487">
+                     <area class="ui" href="#" media="branches/RefTreeWidget.h" title="RefTreeWidget" shape="rect" coords="874,488,1120,645">
+                     <area class="ui" href="#" media="branches/BranchesWidget.h" title="BranchesWidget" shape="rect" coords="870,136,1125,745">
+                     <area class="ui" href="#" media="big_widgets/GitQlientRepo.h" title="GitQlientRepo" shape="rect" coords="10,80,1130,745">
+                  </map>
+               </div>
+            </td>
+            <td style="vertical-align:top">
+                <div style="overflow:scroll; height:970px; width: 960px;" id="gitqlient_src"></div>
+            </td>
+         </tr>
+      </table>
+      <script>
+         $(".ui").on("click", function(e){
+            var mediaVal = $(e.currentTarget).attr('media');
+
+            if (mediaVal !== null && mediaVal !== '') {
+               e.preventDefault();
+               $('#gitqlient_src').html('<h3>' + mediaVal + '</h3>');
+               var source = 'embed.js?target=https://github.com/francescmm/GitQlient/blob/master/src/' + mediaVal;
+               postscribe('#gitqlient_src', '<script src="' + source + '"><\/script>');
+            }
+         });
+         $(".hidden").on("dblclick", function(e){
+            var mediaVal = $(e.currentTarget).attr('media');
+
+            if (mediaVal !== "") {
+               e.preventDefault();
+               $('#gitqlient_src').html('<h3>' + mediaVal + '</h3>');
+               var source = 'embed.js?target=https://github.com/francescmm/GitQlient/blob/master/src/' + mediaVal;
+               postscribe('#gitqlient_src', '<script src="' + source + '"><\/script>');
+            }
+         });
+      </script>
+</body>
+</html>

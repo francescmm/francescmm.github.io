@@ -1,0 +1,64 @@
+<html>
+   <head>
+      <title>GitQlient UI documentation: an interactive mapping guide</title>
+      <script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+      <script type="text/javascript" src="jquery.maphilight.min.js"></script>
+      <script type="text/javascript" src="postscribe.min.js"></script>
+      <link rel="stylesheet" href="styles.css">
+      <script type="text/javascript">
+         $(function() {
+            $('.map').maphilight();
+         });
+      </script>
+   </head>
+   <body>
+      <h1>GitQlient UI documentation: an interactive mapping guide</h1>
+      <p><strong>The different parts that form the UI will be hoevered when using the mouse.</strong></p>
+      <p>This scren shows the main screen once a repository has been opened. The class in charge of wrapping all the widgets is <a href="#">GitQlientRepo</a>.</p>
+      <table>
+         <tr>
+            <td style="vertical-align:top">
+               <div style="display: inline-block; vertical-align: top;">
+                  <h3 class="ui" media="config/InitScreen.h">Graph view (InitScreen)</h3>
+                  <img class="map" src="img/00_init_view.png" width="1138" height="758" usemap="#historywidget">
+                  <map name="historywidget">
+                     <area class="ui" href="graph.html" media="" title="CommitHistoryView" shape="rect" coords="165,435,380,475">
+                     <area class="ui" href="" media="config/GeneralConfigDlg.h" title="GeneralConfigDlg" shape="rect" coords="938,260,970,290">
+                     <area class="ui" href="" media="big_widgets/GitQlient.h" title="GitQlient::addRepoTab" shape="rect" coords="167,345,378,384">
+                     <area class="ui" href="" media="aux_widgets/CreateRepoDlg.h" title="CreateRepoDlg::CLONE" shape="rect" coords="466,345,677,384">
+                     <area class="ui" href="" media="aux_widgets/CreateRepoDlg.h" title="CreateRepoDlg::INIT" shape="rect" coords="760,345,971,384">
+                     <area class="ui" href="#" media="big_widgets/GitQlient.h" title="GitQlient" shape="rect" coords="10,45,1130,745">
+                  </map>
+               </div>
+            </td>
+            <td style="vertical-align:top">
+                <div style="overflow:scroll; height:970px; width: 960px;" id="gitqlient_src"></div>
+            </td>
+         </tr>
+      </table>
+      <script>
+         $(".ui").on("click", function(e){
+            var mediaVal = $(e.currentTarget).attr('media');
+
+            if (mediaVal !== null && mediaVal !== '') {
+               e.preventDefault();
+               $('#gitqlient_src').html('<h3>' + mediaVal + '</h3>');
+               var source = 'embed.js?target=https://github.com/francescmm/GitQlient/blob/master/src/' + mediaVal;
+               postscribe('#gitqlient_src', '<script src="' + source + '"><\/script>');
+            }
+         });
+         $(".hidden").on("dblclick", function(e){
+            var mediaVal = $(e.currentTarget).attr('media');
+
+            if (mediaVal !== "") {
+               e.preventDefault();
+               $('#gitqlient_src').html('<h3>' + mediaVal + '</h3>');
+               var source = 'embed.js?target=https://github.com/francescmm/GitQlient/blob/master/src/' + mediaVal;
+               postscribe('#gitqlient_src', '<script src="' + source + '"><\/script>');
+            }
+         });
+      </script>
+      <!-- <script id="gitqlient_source" src="embed.js?target=https://github.com/francescmm/GitQlient/blob/master/src/big_widgets/Controls.h"></script>
+      -->
+</body>
+</html>

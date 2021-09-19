@@ -1,0 +1,69 @@
+<html>
+   <head>
+      <title>GitQlient UI documentation: an interactive mapping guide</title>
+      <script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+      <script type="text/javascript" src="jquery.maphilight.min.js"></script>
+      <script type="text/javascript" src="postscribe.min.js"></script>
+      <link rel="stylesheet" href="styles.css">
+      <script type="text/javascript">
+         $(function() {
+            $('.map').maphilight();
+         });
+      </script>
+   </head>
+   <body>
+      <h1>GitQlient UI documentation: an interactive mapping guide</h1>
+      <p><strong>The different parts that form the UI will be hoevered when using the mouse.</strong></p>
+      <p>This scren shows the main screen once a repository has been opened. The class in charge of wrapping all the widgets is <a href="#">GitQlientRepo</a>.</p>
+      <table>
+         <tr>
+            <td style="vertical-align:top">
+               <div style="display: inline-block; vertical-align: top;">
+                  <h3 class="ui" media="big_widgets/DiffWidget.h">Diff view (DiffWidget - full view)</h3>
+                  <img class="map" src="img/02_fulldiff.png" width="1138" height="758" usemap="#historywidget">
+                  <map name="historywidget">
+                     <area class="ui" href="graph.html" media="" title="To the Graph view" shape="rect" coords="330,82,380,134">
+                     <area class="ui" href="blamewidget.html" media="" title="To the Blame view" shape="rect" coords="430,82,480,134">
+                     <area class="ui" href="github.html" media="" title="To the GitHub view" shape="rect" coords="595,82,640,134">
+                     <area class="ui" href="config.html" media="" title="To the Config view" shape="rect" coords="700,82,750,134">
+                     <area class="ui" href="#" media="aux_widgets/PomodoroButton.h" title="PomodoroButton" shape="rect" coords="750,82,810,134">
+                     <area class="ui" href="#" media="big_widgets/Controls.h" title="Controls" shape="rect" coords="330,82,810,135">
+                     <area class="ui" href="filediff.html" media="" title="To the FileDiffWidget" shape="rect" coords="17,316,360,341">
+                     <area class="ui" href="#" media="aux_widgets/CommitInfoPanel.h" title="CommitInfoPanel" shape="rect" coords="12,136,368,508">
+                     <area class="ui" href="#" media="aux_widgets/CommitInfoPanel.h" title="CommitInfoPanel" shape="rect" coords="12,555,368,735">
+                     <area class="ui" href="#" media="diff/FullDiffWidget.h" title="FullDiffWidget" shape="rect" coords="375,170,1120,735">
+                     <area class="ui" href="#" media="big_widgets/GitQlientRepo.h" title="GitQlientRepo" shape="rect" coords="10,80,1130,735">
+                  </map>
+               </div>
+            </td>
+            <td style="vertical-align:top">
+                <div style="overflow:scroll; height:970px; width: 960px;" id="gitqlient_src"></div>
+            </td>
+         </tr>
+      </table>
+      <script>
+         $(".ui").on("click", function(e){
+            var mediaVal = $(e.currentTarget).attr('media');
+
+            if (mediaVal !== null && mediaVal !== '') {
+               e.preventDefault();
+               $('#gitqlient_src').html('<h3>' + mediaVal + '</h3>');
+               var source = 'embed.js?target=https://github.com/francescmm/GitQlient/blob/master/src/' + mediaVal;
+               postscribe('#gitqlient_src', '<script src="' + source + '"><\/script>');
+            }
+         });
+         $(".hidden").on("dblclick", function(e){
+            var mediaVal = $(e.currentTarget).attr('media');
+
+            if (mediaVal !== "") {
+               e.preventDefault();
+               $('#gitqlient_src').html('<h3>' + mediaVal + '</h3>');
+               var source = 'embed.js?target=https://github.com/francescmm/GitQlient/blob/master/src/' + mediaVal;
+               postscribe('#gitqlient_src', '<script src="' + source + '"><\/script>');
+            }
+         });
+      </script>
+      <!-- <script id="gitqlient_source" src="embed.js?target=https://github.com/francescmm/GitQlient/blob/master/src/big_widgets/Controls.h"></script>
+      -->
+</body>
+</html>
